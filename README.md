@@ -1,4 +1,4 @@
-# example-mongodb
+# example-mongodb [![Build Status](https://dev.azure.com/lganzzzo/lganzzzo/_apis/build/status/oatpp.example-mongodb?branchName=master)](https://dev.azure.com/lganzzzo/lganzzzo/_build/latest?definitionId=27&branchName=master)
 
 Example project how to work with MongoDB using [oatpp-mongo](https://github.com/oatpp/oatpp-mongo) mondule.
 Project is a web-service with basic CRUD and Swagger-UI.
