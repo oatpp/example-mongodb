@@ -83,3 +83,6 @@ Go to [http://localhost:8000/swagger/ui](http://localhost:8000/swagger/ui) to tr
 
 ## Installing mongocxx on Linux
 
+Installing mongocxx on Linux is an unclear and painful process.
+See [ubuntu-cmake-mongocxx/Dockerfile](https://github.com/oatpp/dockerfiles/blob/master/ci/ubuntu-cmake-mongocxx/Dockerfile)
+for instructions that worked for us.
