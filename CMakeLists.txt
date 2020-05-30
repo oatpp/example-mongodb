@@ -6,14 +6,13 @@ project(${project_name})
 
 set(CMAKE_CXX_STANDARD 11)
 
-add_executable(${project_name}
+add_library(${project_name}-lib
         src/db/Database.cpp
         src/db/Database.hpp
         src/AppComponent.hpp
         src/SwaggerComponent.hpp
         src/controller/UserController.hpp
         src/dto/DTOs.hpp
-        src/App.cpp
         src/db/Model.hpp)
 
 ###################################################################
@@ -35,25 +34,25 @@ find_package(oatpp-mongo    1.1.0 REQUIRED)
 
 ## include directories
 
-target_include_directories(${project_name}
+target_include_directories(${project_name}-lib
         PUBLIC src
 )
 
 ## link libs
 
-target_link_libraries(${project_name}
+target_link_libraries(${project_name}-lib
         PUBLIC oatpp::oatpp
         PUBLIC oatpp::oatpp-swagger
         PUBLIC oatpp::oatpp-mongo
 )
 
 if (TARGET mongo::mongocxx_shared)
-    target_link_libraries(${project_name}
+    target_link_libraries(${project_name}-lib
             PUBLIC mongo::mongocxx_shared
     )
     message("mongo::mongocxx_shared is used")
 elseif(TARGET mongo::mongocxx_static)
-    target_link_libraries(${project_name}
+    target_link_libraries(${project_name}-lib
             PUBLIC mongo::mongocxx_static
     )
 endif()
@@ -62,3 +61,22 @@ endif()
 
 add_definitions(-DOATPP_SWAGGER_RES_PATH="${OATPP_BASE_DIR}/bin/oatpp-swagger/res")
 
+#################################################################
+## add executables
+
+add_executable(${project_name}
+        src/App.cpp
+)
+
+target_link_libraries(${project_name} ${project_name}-lib)
+add_dependencies(${project_name} ${project_name}-lib)
+
+add_executable(${project_name}-test
+        test/tests.cpp
+)
+
+target_link_libraries(${project_name}-test ${project_name}-lib)
+add_dependencies(${project_name}-test ${project_name}-lib)
+
+enable_testing()
+add_test(project-tests ${project_name}-test)
