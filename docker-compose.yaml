@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  mongo-server:
+  mongodb:
     image: mongo
     restart: always
     environment:
@@ -15,6 +15,6 @@ services:
     ports:
       - "8000:8000"
     depends_on:
-      - "mongo-server"
+      - "mongodb"
     environment:
-      DEMO_MONGO_CONN_STR: mongodb://mongo-server/UserDB
+      DEMO_MONGO_CONN_STR: mongodb://mongodb/UserDB

@@ -26,11 +26,7 @@ fi
 
 echo "\n\nINSTALLING MODULE '$MODULE_NAME' ($BUILD_TYPE) using $NPROC threads ...\n\n"
 
-if [[ $MODULE_NAME == "oatpp" ]]; then
- git clone --depth=1 -b ipv4_test https://github.com/oatpp/$MODULE_NAME
-else
- git clone --depth=1 https://github.com/oatpp/$MODULE_NAME
-fi
+git clone --depth=1 https://github.com/oatpp/$MODULE_NAME
 
 cd $MODULE_NAME
 mkdir build
