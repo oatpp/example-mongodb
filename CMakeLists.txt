@@ -28,9 +28,9 @@ message("LIBMONGOCXX_LIBRARIES=${LIBMONGOCXX_LIBRARIES}")
 
 ###################################################################
 
-find_package(oatpp          1.1.0 REQUIRED)
-find_package(oatpp-swagger  1.1.0 REQUIRED)
-find_package(oatpp-mongo    1.1.0 REQUIRED)
+find_package(oatpp          1.2.0 REQUIRED)
+find_package(oatpp-swagger  1.2.0 REQUIRED)
+find_package(oatpp-mongo    1.2.0 REQUIRED)
 
 ## include directories
 
