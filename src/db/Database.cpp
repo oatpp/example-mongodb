@@ -85,7 +85,7 @@ oatpp::Object<UserDto> Database::getUser(const oatpp::String& username) {
 
   if(result) {
     auto view = result->view();
-    auto bson = oatpp::String((const char*)view.data(), view.length(), false /* to not copy view data */);
+    auto bson = oatpp::String((const char*)view.data(), view.length());
     auto user = m_objectMapper.readFromString<oatpp::Object<User>>(bson);
     return dtoFromUser(user);
   }
@@ -104,7 +104,7 @@ oatpp::List<oatpp::Object<UserDto>> Database::getAllUsers() {
   oatpp::List<oatpp::Object<UserDto>> list({});
 
   for(auto view : cursor) {
-    auto bson = oatpp::String((const char*)view.data(), view.length(), false /* to not copy view data */);
+    auto bson = oatpp::String((const char*)view.data(), view.length());
     auto user = m_objectMapper.readFromString<oatpp::Object<User>>(bson);
     list->push_back(dtoFromUser(user));
   }

@@ -16,20 +16,15 @@ void run(const oatpp::base::CommandLineArguments& args) {
   AppComponent components(args);
   
   /* create ApiControllers and add endpoints to router */
-  
   auto router = components.httpRouter.getObject();
-  auto docEndpoints = oatpp::swagger::Controller::Endpoints::createShared();
-  
-  auto userController = UserController::createShared();
-  userController->addEndpointsToRouter(router);
-  
-  docEndpoints->pushBackAll(userController->getEndpoints());
-  
-  auto swaggerController = oatpp::swagger::Controller::createShared(docEndpoints);
-  swaggerController->addEndpointsToRouter(router);
-  
+
+  oatpp::web::server::api::Endpoints docEndpoints;
+
+  docEndpoints.append(router->addController(UserController::createShared())->getEndpoints());
+
+  router->addController(oatpp::swagger::Controller::createShared(docEndpoints));
+
   /* create server */
-  
   oatpp::network::Server server(components.serverConnectionProvider.getObject(),
                                 components.serverConnectionHandler.getObject());
   

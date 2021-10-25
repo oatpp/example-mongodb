@@ -74,7 +74,7 @@ public:
       connectionString = m_cmdArgs.getNamedArgumentValue("--conn-str", "mongodb://localhost/UserDB");
     }
 
-    mongocxx::uri uri(connectionString->std_str());
+    mongocxx::uri uri(*connectionString);
     return std::make_shared<db::Database>(uri, "UserDB", "all");
 
   }());
